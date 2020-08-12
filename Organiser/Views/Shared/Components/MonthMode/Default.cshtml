@@ -1,62 +1,66 @@
-﻿@model IEnumerable<IEvent>
+﻿@model Dictionary<DateTime, IEnumerable<IEvent>>
 
 @if (Model.Count() > 0)
 {
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Дата и время начала</th>
-            <th>Дата и время окончания</th>
-            <th>Тип</th>
-            <th>Тема</th>
-            <th>Место</th>
-        </tr>
-
-        @foreach (var e in Model)
-        {
+    @foreach (var key in Model.Keys)
+    {
+        <h2>@key.ToString("MMMM yyyy")</h2>
+        <table class="table table-bordered table-striped">
             <tr>
-                <td>@e.BeginDate.ToString("g")</td>
-                @if (e is Meet meet)
-                {
-                    <td>
-                        @meet.EndDate.ToString("g")
-                    </td>
-                    <td>@e.TypeEvent</td>
-                    <td>@e.Subject</td>
-                    <td>
-                        @meet.Place;
-                    </td>
-                }
-                @if (e is Case caseAction)
-                {
-                    <td>
-                        @caseAction.EndDate.ToString("g")
-                    </td>
-                    <td>@e.TypeEvent</td>
-                    <td>@e.Subject</td>
-                    <td>
-                    </td>
-                }
-                @if (e is Reminder)
-                {
-                    <td>
-                        @e.BeginDate.ToString("g")
-                    </td>
-                    <td>
-                        @e.TypeEvent
-                    </td>
-                    <td>
-                        @e.Subject
-                    </td>
-                    <td>
-                    </td>
-                }
+                <th>Дата и время начала</th>
+                <th>Дата и время окончания</th>
+                <th>Тип</th>
+                <th>Тема</th>
+                <th>Место</th>
             </tr>
-        }
-    </table>
+
+            @foreach (var e in Model[key])
+            {
+                <tr>
+                    <td>@e.BeginDate.ToString("g")</td>
+                    @if (e is Meet meet)
+                    {
+                        <td>
+                            @meet.EndDate.ToString("g")
+                        </td>
+                        <td>@e.TypeEvent</td>
+                        <td>@e.Subject</td>
+                        <td>
+                            @meet.Place;
+                        </td>
+                    }
+                    @if (e is Case caseAction)
+                    {
+                        <td>
+                            @caseAction.EndDate.ToString("g")
+                        </td>
+                        <td>@e.TypeEvent</td>
+                        <td>@e.Subject</td>
+                        <td>
+                        </td>
+                    }
+                    @if (e is Reminder)
+                    {
+                        <td>
+                            @e.BeginDate.ToString("g")
+                        </td>
+                        <td>
+                            @e.TypeEvent
+                        </td>
+                        <td>
+                            @e.Subject
+                        </td>
+                        <td>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    }
 }
 else
 {
     <div>
-        Записей нет.
+    Записей нет.
     </div>
 }

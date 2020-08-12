@@ -1,0 +1,13 @@
+﻿@model EventsListModeShow
+
+<p class="font-weight-bold text-center">Фильтр</p>
+<form method="get">
+    @foreach (var type in Model.Events.Select(x => x.TypeEvent).Distinct())
+    {
+        <label><input type="checkbox" name="@type" value="true" /> @type</label><br />
+    }
+    <label>Дата и время начала</label><br /> <input type="datetime-local" name="BeginDate"/>
+    <label>Дата и время окончания</label><br /> <input type="datetime-local" name="EndDate"/><hr />
+    <label>Искать в теме текст</label><br /> <input type="text" name="TextSubject"/><hr />
+    <button type="submit" class="btn btn-primary">Применить</button>
+</form>
