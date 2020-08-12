@@ -1,0 +1,18 @@
+﻿@model EventsListModeShow
+
+<form asp-action="ModeShow" asp-controller="DailyPlanner" method="get">
+    <select class="custom-select-sm justify-content-start" name="value">
+        @foreach (var mode in Model.ModesShow.ModesShow)
+        {
+            if (mode == Model.CurrentModeShow)
+            {
+                <option selected value="@mode">@Html.DisplayFor(e => mode)</option>
+            }
+            else
+            {
+                <option value="@mode">@Html.DisplayFor(e => mode)</option>
+            }
+        }
+    </select>
+    <input class="btn btn-primary" type="submit" value="Показать">
+</form>

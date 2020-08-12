@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IEvent>
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Дата и время начала</th>
+            <th>Дата и время окончания</th>
+            <th>Тип</th>
+            <th>Тема</th>
+            <th>Место</th>
+        </tr>
+
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.BeginDate.ToString("g")</td>
+                @if (e is Meet meet)
+                {
+                    <td>
+                        @meet.EndDate.ToString("g")
+                    </td>
+                    <td>@e.TypeEvent</td>
+                    <td>@e.Subject</td>
+                    <td>
+                        @meet.Place;
+                    </td>
+                }
+                @if (e is Case caseAction)
+                {
+                    <td>
+                        @caseAction.EndDate.ToString("g")
+                    </td>
+                    <td>@e.TypeEvent</td>
+                    <td>@e.Subject</td>
+                    <td>
+                    </td>
+                }
+                @if (e is Reminder)
+                {
+                    <td>
+                        @e.BeginDate.ToString("g")
+                    </td>
+                    <td>
+                        @e.TypeEvent
+                    </td>
+                    <td>
+                        @e.Subject
+                    </td>
+                    <td>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div>
+        Записей нет.
+    </div>
+}

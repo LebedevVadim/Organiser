@@ -1,0 +1,38 @@
+﻿@model EventsListModeShow
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link asp-href-include="lib/bootstrap/dist/css/*.min.css" rel="stylesheet" />
+    <script asp-src-include="lib/jquery/dist/jquery.min.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="navbar bg-white">
+        <a class="navbar-brand" asp-action="List" asp-controller="DailyPlanner">Органайзер</a>
+        @await Html.PartialAsync("ModeView", Model)
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+        <div class="col-md-2">
+            <p class="font-weight-bold text-center">Фильтр</p>
+            <form method="get">
+                <label><input type="checkbox" name="Case" value="true" /> Дело</label><br />
+                <label><input type="checkbox" name="Meet" value="true" /> Встреча</label><br />
+                <label><input type="checkbox" name="Reminder" value="true" /> Памятка</label><br /> <hr />
+                <label>Дата и время начала</label><br /> <input type="datetime-local" name="BeginDate" />
+                <label>Дата и время окончания</label><br /> <input type="datetime-local" name="EndDate" /><hr />
+                <label>Искать в теме текст</label><br /> <input type="text" name="TextSubject" /><hr />
+                <button type="submit" class="btn btn-primary">Применить</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+    </script>
+</body>
+</html>
+
