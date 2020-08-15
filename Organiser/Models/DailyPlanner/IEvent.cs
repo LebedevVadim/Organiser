@@ -11,13 +11,17 @@ namespace Organiser.Models.DailyPlanner
     {
         int EventID { get; set; }
 
+        Guid TypeGuid { get; }
+
         [Display(Name = "Тип")]
         string TypeEvent { get; }
 
         [Display(Name = "Тема")]
+        [Required(ErrorMessage = "Введите тему")]
         string Subject { get; set; }
 
         [Display(Name = "Дата и время начала")]
+        [Required(ErrorMessage = "Введите дату и время начала")]
         DateTime BeginDate { get; set; }
     }
 }

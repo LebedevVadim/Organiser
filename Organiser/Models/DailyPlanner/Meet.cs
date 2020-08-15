@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Organiser.Models.Constants;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,6 +11,8 @@ namespace Organiser.Models.DailyPlanner
         [Key]
         [Column("Id")]
         public int EventID { get; set; }
+
+        public Guid TypeGuid => TypeGUIDs.MeetGuid;
 
         [Required]
         [MaxLength(10)]

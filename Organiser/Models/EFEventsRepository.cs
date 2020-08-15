@@ -25,7 +25,7 @@ namespace Organiser.Models
 
         public IEvent DeleteEvent(int eventId, string typeEvent)
         {
-            var dbEntry = context.Events.FirstOrDefault(x => x.EventID == eventId && x.TypeEvent == typeEvent);
+            var dbEntry = context.Events.FirstOrDefault(x => x.EventID == eventId && x.TypeGuid.ToString() == typeEvent);
 
             if (dbEntry != null)
             {

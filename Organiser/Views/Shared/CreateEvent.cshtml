@@ -2,9 +2,9 @@
 
 <form asp-action="Create" asp-controller="DailyPlanner" method="get">
     <select class="custom-select-sm justify-content-start" name="typeEvent">
-        @foreach (var mode in Model.Events.Select(x => x.TypeEvent).Distinct())
+        @foreach (var mode in Model.Events.Select(x => new { x.TypeEvent, x.TypeGuid }).Distinct())
         {
-            <option value="@mode">@Html.DisplayFor(e => mode)</option>
+            <option value="@mode.TypeGuid.ToString()">@Html.DisplayFor(e => mode.TypeEvent)</option>
         }
     </select>
     <input class="btn btn-primary" type="submit" value="Создать">

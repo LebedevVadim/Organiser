@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Organiser.Models;
+using Organiser.Models.Constants;
 using Organiser.Models.DailyPlanner;
 using Organiser.Models.ViewModels;
 
@@ -31,17 +32,17 @@ namespace Organiser.Controllers
         public ViewResult Edit(int eventId, string typeEvent)
         {
             ViewBag.Title = "Редактирование";
-            return View(eventsRepository.Events.FirstOrDefault(x => x.EventID == eventId && x.TypeEvent == typeEvent));
+            return View(eventsRepository.Events.FirstOrDefault(x => x.EventID == eventId && x.TypeGuid.ToString() == typeEvent));
         }
 
         public ViewResult Create(string typeEvent)
         {
             ViewBag.Title = "Создание";
-            if (typeEvent == "Дело")
+            if (typeEvent == TypeGUIDs.CaseGuid.ToString())
                 return View(nameof(Edit), new Case());
-            else if (typeEvent == "Встреча")
+            else if (typeEvent == TypeGUIDs.MeetGuid.ToString())
                 return View(nameof(Edit), new Meet());
-            else if (typeEvent == "Памятка")
+            else if (typeEvent == TypeGUIDs.ReminderGuid.ToString())
                 return View(nameof(Edit), new Reminder());
             else
                 return View("Error", "Не найден тип!");

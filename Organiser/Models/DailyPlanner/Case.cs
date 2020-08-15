@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Organiser.Models.Constants;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,6 +11,8 @@ namespace Organiser.Models.DailyPlanner
         [Key]
         [Column("Id")]
         public int EventID { get; set; }
+
+        public Guid TypeGuid => TypeGUIDs.CaseGuid;
 
         [Required]
         [MaxLength(10)]
@@ -24,6 +27,6 @@ namespace Organiser.Models.DailyPlanner
 
         [Display(Name = "Дата и время окончания")]
         [Required(ErrorMessage = "Введите дату окончания")]
-        public DateTime EndDate { get; set; } 
+        public DateTime EndDate { get; set; }
     }
 }

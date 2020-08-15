@@ -52,9 +52,9 @@
             }
             <td class="text-center">
                 <form asp-action="Delete" method="post">
-                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-eventId="@e.EventID" asp-route-typeEvent="@e.TypeEvent">Редактировать</a>
+                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-eventId="@e.EventID" asp-route-typeEvent="@e.TypeGuid.ToString()">Редактировать</a>
                     <input type="hidden" name="EventId" value="@e.EventID" />
-                    <input type="hidden" name="TypeEvent" value="@e.TypeEvent" />
+                    <input type="hidden" name="TypeEvent" value="@e.TypeGuid.ToString()" />
                     <input type="hidden" name="ReturnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
                 </form>

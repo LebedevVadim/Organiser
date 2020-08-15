@@ -1,17 +1,17 @@
 ﻿@model IEvent
-<input type="hidden" asp-for="EventID">
+<input type="hidden" asp-for="@Model.EventID">
+<input type="hidden" asp-for="@Model.TypeGuid">
 <div class="form-group">
-    <label asp-for="TypeEvent"></label>
-    <div><span asp-validation-for="TypeEvent" class="text-danger"></span></div>
-    <input disabled asp-for="TypeEvent" class="form-control" />
+    <label asp-for="@Model.TypeEvent"></label>
+    <input disabled class="form-control" value="@Model.TypeEvent"/>
 </div>
 <div class="form-group">
-    <label asp-for="Subject"></label>
-    <div><span asp-validation-for="Subject" class="text-danger"></span></div>
-    <input asp-for="Subject" class="form-control" />
+    <label asp-for="@Model.Subject"></label>
+    <div><span asp-validation-for="@Model.Subject" class="text-danger"></span></div>
+    <input asp-for="@Model.Subject" class="form-control" />
 </div>
 <div class="form-group">
-    <label asp-for="BeginDate"></label>
-    <div><span asp-validation-for="BeginDate" class="text-danger"></span></div>
-    <input type="datetime-local" asp-for="BeginDate" class="form-control" />
+    <label asp-for="@Model.BeginDate"></label>
+    <div><span asp-validation-for="@Model.BeginDate" class="text-danger"></span></div>
+    <input type="datetime-local" asp-for="@Model.BeginDate" value="null" class="form-control" />
 </div>
