@@ -33,7 +33,7 @@ namespace Organiser.Components
             foreach (var uMonth in uniqMonth)
             {
                 tmpList = eventsRepository.Events.Where(x => x.BeginDate.Month == uMonth.Month).ToList();
-                listView[new DateTime(uMonth.Year, uMonth.Month, 01)] = tmpList;
+                listView[new DateTime(uMonth.Year, uMonth.Month, 01)] = tmpList.OrderBy(x => x.BeginDate);
             }
         }
     }

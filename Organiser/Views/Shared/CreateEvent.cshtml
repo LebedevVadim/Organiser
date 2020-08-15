@@ -1,0 +1,11 @@
+﻿@model EventsListModeShow
+
+<form asp-action="Create" asp-controller="DailyPlanner" method="get">
+    <select class="custom-select-sm justify-content-start" name="typeEvent">
+        @foreach (var mode in Model.Events.Select(x => x.TypeEvent).Distinct())
+        {
+            <option value="@mode">@Html.DisplayFor(e => mode)</option>
+        }
+    </select>
+    <input class="btn btn-primary" type="submit" value="Создать">
+</form>

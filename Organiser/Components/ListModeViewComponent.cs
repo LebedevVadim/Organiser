@@ -6,7 +6,7 @@ namespace Organiser.Components
 {
     public class ListModeViewComponent : ViewComponent
     {
-        IEventsRepository eventsRepository;
+        private readonly IEventsRepository eventsRepository;
 
         public ListModeViewComponent(IEventsRepository repository)
         {

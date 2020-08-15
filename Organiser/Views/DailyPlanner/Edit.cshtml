@@ -1,0 +1,17 @@
+﻿@model IEvent
+@{
+    Layout = "_EditLayout";
+}
+
+@if (Model is Case caseEvent)
+{
+    @await Html.PartialAsync("EditCase", caseEvent);
+}
+@if (Model is Meet meetEvent)
+{
+    @await Html.PartialAsync("EditMeet", meetEvent);
+}
+@if (Model is Reminder reminder)
+{
+    @await Html.PartialAsync("EditReminder", reminder);
+}

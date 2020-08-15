@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Organiser.Models;
 using Organiser.Models.DailyPlanner;
 using System;
@@ -12,7 +11,7 @@ namespace Organiser.Components
     {
         private readonly IEventsRepository eventsRepository;
 
-        private Dictionary<DateTime, IEnumerable<IEvent>> listView; 
+        private readonly Dictionary<DateTime, IEnumerable<IEvent>> listView; 
 
         public DayModeViewComponent(IEventsRepository repository)
         {
@@ -28,14 +27,14 @@ namespace Organiser.Components
 
         private void SetListView()
         {
-            var uniqDays = eventsRepository.Events.Select(x => x.BeginDate).Distinct().OrderBy(x => x);
+            var uniqDays = eventsRepository.Events.Select(x => x.BeginDate.Date).Distinct().OrderBy(x => x);
             
             var tmpList = new List<IEvent>();
 
             foreach (var uDay in uniqDays)
             {
                 tmpList = eventsRepository.Events.Where(x => x.BeginDate.Date == uDay.Date).ToList();
-                listView[uDay] = tmpList;
+                listView[uDay] = tmpList.OrderBy(x => x.BeginDate);
             }
         }
     }

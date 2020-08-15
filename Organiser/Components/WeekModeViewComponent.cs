@@ -28,14 +28,27 @@ namespace Organiser.Components
 
         private void SetListView()
         {
-            var uniqWeek = eventsRepository.Events.Select(x => new Week { BeginWeek = x.BeginDate, EndWeek = x.BeginDate.AddDays(7) }).Distinct().OrderBy(x => x.BeginWeek);
+            var uniqWeek = new List<Week>();
+
+            foreach (var e in eventsRepository.Events)
+            {
+                if (uniqWeek.Any())
+                {
+                    if (!uniqWeek.Any(x => x.BeginWeek.Date <= e.BeginDate.Date && x.EndWeek.Date >= e.BeginDate.Date))
+                        uniqWeek.Add(new Week { BeginWeek = e.BeginDate.Date, EndWeek = e.BeginDate.AddDays(7).Date });
+                }
+                else
+                {
+                    uniqWeek.Add(new Week { BeginWeek = e.BeginDate.Date, EndWeek = e.BeginDate.AddDays(7).Date });
+                }
+            }
 
             var tmpList = new List<IEvent>();
 
-            foreach (var uWeek in uniqWeek)
+            foreach (var uWeek in uniqWeek.OrderBy(x => x.BeginWeek))
             {
                 tmpList = eventsRepository.Events.Where(x => x.BeginDate.Date >= uWeek.BeginWeek.Date && x.BeginDate.Date <= uWeek.EndWeek.Date).ToList();
-                listView[uWeek] = tmpList;
+                listView[uWeek] = tmpList.OrderBy(x => x.BeginDate);
             }
         }
     }
