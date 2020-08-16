@@ -1,8 +1,7 @@
 ﻿using Organiser.Models.DailyPlanner;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Organiser.Models.Constants;
+using System;
 
 namespace Organiser.Models.ViewModels
 {

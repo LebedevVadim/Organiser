@@ -11,7 +11,7 @@
 <body >
     <div class="navbar bg-white">
         <a class="navbar-brand" asp-action="List" asp-controller="DailyPlanner">Органайзер</a>
-        @await Html.PartialAsync("CreateEvent", Model)
+        @await Html.PartialAsync("CreateEvent")
         @await Html.PartialAsync("ModeView", Model)
     </div>
     <div class="row">
@@ -22,8 +22,8 @@
         <div class="col-md-10">
             @RenderBody()
         </div>
-        <div class="col-md-2">
-            @await Html.PartialAsync("FilterView", Model)
+        <div>
+            @await Html.PartialAsync("FilterView")
         </div>
     </div>
 </body>

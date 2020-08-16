@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Organiser.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Security.Policy;
 
 namespace Organiser
 {
@@ -21,7 +22,7 @@ namespace Organiser
                 Configuration["ConnectionStrings:DefaultConnection"]
                 ));
             services.AddMvc();
-            services.AddSingleton<IEventsRepository, EFEventsRepository>();
+            services.AddTransient<IEventsRepository, EFEventsRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -29,7 +30,13 @@ namespace Organiser
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseStatusCodePages();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+               {
+                    routes.MapRoute(
+                    name: "default",
+                    template: "{controller=DailyPlanner}/{action=List}/{id?}");
+               });
+            app.ApplicationServices.GetRequiredService<ApplicationDbContext>().Database.Migrate();
             SeedData.Seed(app);
         }
     }

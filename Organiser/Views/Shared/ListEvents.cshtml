@@ -14,11 +14,11 @@
     {
 
         <tr>
-            <td>@e.BeginDate.ToString("g")</td>
+            <td>@e.BeginDate.Value.ToString("g")</td>
             @if (e is Meet meet)
             {
                 <td>
-                    @meet.EndDate.ToString("g")
+                    @meet.EndDate.Value.ToString("g")
                 </td>
                 <td>@e.TypeEvent</td>
                 <td>@e.Subject</td>
@@ -29,7 +29,7 @@
             @if (e is Case caseAction)
             {
                 <td>
-                    @caseAction.EndDate.ToString("g")
+                    @caseAction.EndDate.Value.ToString("g")
                 </td>
                 <td>@e.TypeEvent</td>
                 <td>@e.Subject</td>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Organiser.Models;
 using Organiser.Models.DailyPlanner;
 using System;
 using System.Collections.Generic;
@@ -9,37 +8,33 @@ namespace Organiser.Components
 {
     public class WeekModeViewComponent : ViewComponent
     {
-        private readonly IEventsRepository eventsRepository;
-
         private readonly Dictionary<Week, IEnumerable<IEvent>> listView;
 
-        public WeekModeViewComponent(IEventsRepository repository)
+        public WeekModeViewComponent()
         {
-            eventsRepository = repository;
-
             listView = new Dictionary<Week, IEnumerable<IEvent>>();
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(IEnumerable<IEvent> events)
         {
-            SetListView();
+            SetListView(events);
             return View(listView);
         }
 
-        private void SetListView()
+        private void SetListView(IEnumerable<IEvent> events)
         {
             var uniqWeek = new List<Week>();
 
-            foreach (var e in eventsRepository.Events)
+            foreach (var e in events)
             {
                 if (uniqWeek.Any())
                 {
-                    if (!uniqWeek.Any(x => x.BeginWeek.Date <= e.BeginDate.Date && x.EndWeek.Date >= e.BeginDate.Date))
-                        uniqWeek.Add(new Week { BeginWeek = e.BeginDate.Date, EndWeek = e.BeginDate.AddDays(7).Date });
+                    if (!uniqWeek.Any(x => x.BeginWeek.Date <= e.BeginDate.Value.Date && x.EndWeek.Date >= e.BeginDate.Value.Date))
+                        uniqWeek.Add(new Week { BeginWeek = e.BeginDate.Value.Date, EndWeek = e.BeginDate.Value.AddDays(7).Date });
                 }
                 else
                 {
-                    uniqWeek.Add(new Week { BeginWeek = e.BeginDate.Date, EndWeek = e.BeginDate.AddDays(7).Date });
+                    uniqWeek.Add(new Week { BeginWeek = e.BeginDate.Value.Date, EndWeek = e.BeginDate.Value.AddDays(7).Date });
                 }
             }
 
@@ -47,7 +42,7 @@ namespace Organiser.Components
 
             foreach (var uWeek in uniqWeek.OrderBy(x => x.BeginWeek))
             {
-                tmpList = eventsRepository.Events.Where(x => x.BeginDate.Date >= uWeek.BeginWeek.Date && x.BeginDate.Date <= uWeek.EndWeek.Date).ToList();
+                tmpList = events.Where(x => x.BeginDate.Value.Date >= uWeek.BeginWeek.Date && x.BeginDate.Value.Date <= uWeek.EndWeek.Date).ToList();
                 listView[uWeek] = tmpList.OrderBy(x => x.BeginDate);
             }
         }

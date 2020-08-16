@@ -4,17 +4,17 @@
 }
 @if (Model.CurrentModeShow == Organiser.Models.ModeShowEnum.Day)
 {
-    @await Component.InvokeAsync("DayMode");
+    @await Component.InvokeAsync("DayMode", Model.Events);
 }
 @if (Model.CurrentModeShow == Organiser.Models.ModeShowEnum.Week)
 {
-    @await Component.InvokeAsync("WeekMode");
+    @await Component.InvokeAsync("WeekMode", Model.Events);
 }
 @if (Model.CurrentModeShow == Organiser.Models.ModeShowEnum.Month)
 {
-    @await Component.InvokeAsync("MonthMode");
+    @await Component.InvokeAsync("MonthMode", Model.Events);
 }
 @if (Model.CurrentModeShow == Organiser.Models.ModeShowEnum.List)
 {
-    @await Component.InvokeAsync("ListMode");
+    @await Component.InvokeAsync("ListMode", Model.Events);
 }

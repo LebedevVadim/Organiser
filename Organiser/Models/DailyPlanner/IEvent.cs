@@ -22,6 +22,6 @@ namespace Organiser.Models.DailyPlanner
 
         [Display(Name = "Дата и время начала")]
         [Required(ErrorMessage = "Введите дату и время начала")]
-        DateTime BeginDate { get; set; }
+        DateTime? BeginDate { get; set; }
     }
 }

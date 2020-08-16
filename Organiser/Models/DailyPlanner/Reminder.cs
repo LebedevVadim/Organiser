@@ -12,17 +12,17 @@ namespace Organiser.Models.DailyPlanner
         [Column("Id")]
         public int EventID { get; set; }
 
-        public Guid TypeGuid => TypeGUIDs.ReminderGuid;
+        public Guid TypeGuid => Types.Reminder.Guid;
 
         [Required]
         [MaxLength(10)]
-        public string TypeEvent => "Памятка";
+        public string TypeEvent => Types.Reminder.TypeName;
 
         [Required(ErrorMessage = "Введите тему!")]
         [MaxLength(100)]
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "Введите дату начала")]
-        public DateTime BeginDate { get; set; }
+        public DateTime? BeginDate { get; set; }
     }
 }

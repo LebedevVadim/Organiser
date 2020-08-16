@@ -2,9 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Organiser.Models.DailyPlanner;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Organiser.Models
 {

@@ -1,13 +1,13 @@
-﻿@model EventsListModeShow
-
-<p class="font-weight-bold text-center">Фильтр</p>
-<form method="get">
-    @foreach (var type in Model.Events.Select(x => x.TypeEvent).Distinct())
-    {
-        <label><input type="checkbox" name="@type" value="true" /> @type</label><br />
-    }
-    <label>Дата и время начала</label><br /> <input type="datetime-local" name="BeginDate"/>
-    <label>Дата и время окончания</label><br /> <input type="datetime-local" name="EndDate"/><hr />
-    <label>Искать в теме текст</label><br /> <input type="text" name="TextSubject"/><hr />
+﻿<p class="font-weight-bold text-center">Фильтр</p>
+<form asp-action="Filter" method="get">
+    <label><input type="checkbox" name="typeGuids" value="@Types.Case.Guid.ToString()" /> @Html.DisplayFor(e => Types.Case.TypeName)</label><br />
+    <label><input type="checkbox" name="typeGuids" value="@Types.Meet.Guid.ToString()" /> @Html.DisplayFor(e => Types.Meet.TypeName)</label><br />
+    <label><input type="checkbox" name="typeGuids" value="@Types.Reminder.Guid.ToString()" /> @Html.DisplayFor(e => Types.Reminder.TypeName)</label><br />
+    <label>Дата и время начала</label><br /> <input type="datetime-local" name="beginDate" /><br />
+    <input type="radio" name="mode" value="more" /><label> Больше </label>
+    <input type="radio" name="mode" value="less" /><label> Меньше </label>
+    <input type="radio" name="mode" value="equally" checked /><label> Равно </label><br />
+    <label>Искать в теме текст</label><br /> <input type="text" name="subject" /><hr />
     <button type="submit" class="btn btn-primary">Применить</button>
+    <a asp-action="List" class="btn btn-secondary btn-sm">Отменить</a>
 </form>

@@ -12,11 +12,11 @@ namespace Organiser.Models.DailyPlanner
         [Column("Id")]
         public int EventID { get; set; }
 
-        public Guid TypeGuid => TypeGUIDs.MeetGuid;
+        public Guid TypeGuid => Types.Meet.Guid;
 
         [Required]
         [MaxLength(10)]
-        public string TypeEvent => "Встреча";
+        public string TypeEvent => Types.Meet.TypeName;
 
         [Required(ErrorMessage = "Введите тему!")]
         [MaxLength(100)]
@@ -28,11 +28,11 @@ namespace Organiser.Models.DailyPlanner
         public string Place { get; set; }
 
         [Required(ErrorMessage = "Введите дату начала")]
-        public DateTime BeginDate { get; set; }
+        public DateTime? BeginDate { get; set; }
 
         [Display(Name = "Дата и время окончания")]
         [Required(ErrorMessage = "Введите дату окончания")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         
     }
 }

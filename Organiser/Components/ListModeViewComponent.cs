@@ -1,21 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Organiser.Models;
+using Organiser.Models.DailyPlanner;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Organiser.Components
 {
     public class ListModeViewComponent : ViewComponent
     {
-        private readonly IEventsRepository eventsRepository;
-
-        public ListModeViewComponent(IEventsRepository repository)
+        public IViewComponentResult Invoke(IEnumerable<IEvent> events)
         {
-            eventsRepository = repository;
-        }
-
-        public IViewComponentResult Invoke()
-        {
-            return View(eventsRepository.Events.OrderBy(x => x.BeginDate));
+            return View(events.OrderBy(x => x.BeginDate));
         }
     }
 }

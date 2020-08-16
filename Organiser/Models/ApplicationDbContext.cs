@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Organiser.Models.DailyPlanner;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Organiser.Models
 {

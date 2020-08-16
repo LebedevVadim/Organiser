@@ -9,31 +9,28 @@ namespace Organiser.Components
 {
     public class DayModeViewComponent : ViewComponent
     {
-        private readonly IEventsRepository eventsRepository;
-
         private readonly Dictionary<DateTime, IEnumerable<IEvent>> listView; 
 
-        public DayModeViewComponent(IEventsRepository repository)
+        public DayModeViewComponent()
         {
-            eventsRepository = repository;
             listView = new Dictionary<DateTime, IEnumerable<IEvent>>();
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(IEnumerable<IEvent> events)
         {
-            SetListView();
+            SetListView(events);
             return View(listView);
         }
 
-        private void SetListView()
+        private void SetListView(IEnumerable<IEvent> events)
         {
-            var uniqDays = eventsRepository.Events.Select(x => x.BeginDate.Date).Distinct().OrderBy(x => x);
+            var uniqDays = events.Select(x => x.BeginDate.Value.Date).Distinct().OrderBy(x => x);
             
             var tmpList = new List<IEvent>();
 
             foreach (var uDay in uniqDays)
             {
-                tmpList = eventsRepository.Events.Where(x => x.BeginDate.Date == uDay.Date).ToList();
+                tmpList = events.Where(x => x.BeginDate.Value.Date == uDay.Date).ToList();
                 listView[uDay] = tmpList.OrderBy(x => x.BeginDate);
             }
         }
