@@ -1,0 +1,64 @@
+﻿@model IEnumerable<IEvent>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Дата и время начала</th>
+        <th>Дата и время окончания</th>
+        <th>Тип</th>
+        <th>Тема</th>
+        <th>Место</th>
+        <th>Действие</th>
+    </tr>
+
+    @foreach (var e in Model)
+    {
+
+        <tr>
+            <td>@e.BeginDate.Value.ToString("g")</td>
+            @if (e is Meet meet)
+            {
+                <td>
+                    @meet.EndDate.Value.ToString("g")
+                </td>
+                <td>@e.TypeEvent</td>
+                <td>@e.Subject</td>
+                <td>
+                    @meet.Place
+                </td>
+            }
+            @if (e is Case caseAction)
+            {
+                <td>
+                    @caseAction.EndDate.Value.ToString("g")
+                </td>
+                <td>@e.TypeEvent</td>
+                <td>@e.Subject</td>
+                <td>
+                </td>
+            }
+            @if (e is Reminder)
+            {
+                <td>
+                    
+                </td>
+                <td>
+                    @e.TypeEvent
+                </td>
+                <td>
+                    @e.Subject
+                </td>
+                <td>
+                </td>
+            }
+            <td class="text-center">
+                <form asp-action="Delete" method="post">
+                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-eventId="@e.EventID" asp-route-typeEvent="@e.TypeGuid.ToString()">Редактировать</a>
+                    <input type="hidden" name="EventId" value="@e.EventID" />
+                    <input type="hidden" name="TypeEvent" value="@e.TypeGuid.ToString()" />
+                    <input type="hidden" name="ReturnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,31 @@
+﻿@model EventsListModeShow
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link asp-href-include="lib/bootstrap/dist/css/*.min.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body >
+    <div class="navbar bg-white">
+        <a class="navbar-brand" asp-action="List" asp-controller="DailyPlanner">Органайзер</a>
+        @await Html.PartialAsync("CreateEvent")
+        @await Html.PartialAsync("ModeView", Model)
+    </div>
+    <div class="row">
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success">@TempData["message"]</div>
+        }
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+        <div>
+            @await Html.PartialAsync("FilterView")
+        </div>
+    </div>
+</body>
+</html>
+

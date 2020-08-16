@@ -1,0 +1,8 @@
+﻿<form asp-action="Create" asp-controller="DailyPlanner" method="get">
+    <select class="custom-select-sm justify-content-start" name="typeEvent">
+        <option value="@Types.Case.Guid.ToString()">@Html.DisplayFor(e => Types.Case.TypeName)</option>
+        <option value="@Types.Meet.Guid.ToString()">@Html.DisplayFor(e => Types.Meet.TypeName)</option>
+        <option value="@Types.Reminder.Guid.ToString()">@Html.DisplayFor(e => Types.Reminder.TypeName)</option>
+    </select>
+    <input class="btn btn-primary" type="submit" value="Создать">
+</form>
